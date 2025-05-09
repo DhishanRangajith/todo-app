@@ -1,5 +1,7 @@
 ## Introduction
 
+![My Image](./example.png)
+
 This project is a full-stack Todo application built with Spring Boot 3.4.5 (Java 17) for the backend, Angular 19 for the frontend, and MySQL 8 as the database. The entire application is containerized using Docker and managed with Docker Compose for seamless setup, deployment, and local development.
 
 It demonstrates best practices in full-stack development, including RESTful API design, component-based frontend architecture, and database integration. The backend includes unit tests with code coverage reporting via JaCoCo, while frontend unit tests are pending implementation.
