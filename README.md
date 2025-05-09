@@ -89,8 +89,6 @@ mvn test
 
 The coverage report will be generated in the path: `/todo-app/target/site/index.html`
 
----
-
 ### 8. Frontend Unit Testing
 
 Note: Frontend unit tests are currently pending and need to be implemented for the Angular application. Once these tests are ready, you can run them using Angular's testing tools like Jasmine and Karma.
