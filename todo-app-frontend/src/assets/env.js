@@ -1,3 +1,3 @@
 window.__env = {
-  apiUrl: "${API_URL:-http://localhost:8080}"
+  apiUrl: "http://localhost:8020"
 };
