@@ -1,0 +1,15 @@
+<div class="row m-1 mt-2">
+    <div class="card col-md-12 custom-card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-10">
+                    <h5 class="card-title">{{toDoTask.title}}</h5>
+                </div>
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-sm btn-success float-end" (click)="onDone()">Done</a>
+                </div>
+            </div>
+            <p class="card-text">{{toDoTask.description}}</p>
+        </div>
+    </div>
+</div>

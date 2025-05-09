@@ -1,0 +1,10 @@
+<app-todo-view 
+    *ngFor="let task of toDoTaskList"
+    [toDoTask]="task"
+    (doneTask)="handleTaskDone($event)" />
+
+<div *ngIf="toDoTaskList.length == 0" class="alert alert-info text-center mt-3">
+    No tasks available. Add a new task to get started!
+</div>
+
+<app-loading [isLoading]="isLoading"/>

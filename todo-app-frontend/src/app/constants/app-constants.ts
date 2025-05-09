@@ -1,0 +1,4 @@
+export const APP_CONSTANTS = {
+  STATUS_ACTIVE: 1,
+  STATUS_INACTIVE: 0
+}

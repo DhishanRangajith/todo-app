@@ -1,0 +1,15 @@
+FROM tomcat:10.1.40-jre17
+
+RUN apt-get update
+
+WORKDIR /usr/local/tomcat/webapps
+
+# ENV DATASOURCE_URL=jdbc:mysql://sql3:3306/todo_app
+# ENV DATASOURCE_USERNAME=dhishan
+# ENV DATASOURCE_PASSWORD=dra@1234
+# ENV SERVER_PORT=8080
+# ENV WEB_CONFIG_ALLOWED_ORIGINS=...
+
+COPY ./target/todo-app-0.0.1.war ./ROOT.war
+
+CMD ["catalina.sh", "run"]
