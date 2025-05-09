@@ -1,8 +1,13 @@
 HELP.md
-target/
+target/*
+!target/site/
+!target/site/jacoco/
+!target/site/jacoco/*.html
+!target/*.war
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+C:\Users\User\Desktop\ToDoApp\todo-app\target\site\jacoco\index.html
 
 ### STS ###
 .apt_generated
@@ -29,5 +34,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+.mvn/
+
 ### VS Code ###
 .vscode/
+

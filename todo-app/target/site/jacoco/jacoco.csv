@@ -1,0 +1,14 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+todo-app,com.dra.todo_app,ServletInitializer,12,0,0,0,2,0,2,0,2,0
+todo-app,com.dra.todo_app,TodoAppApplication,5,3,0,0,2,1,1,1,1,1
+todo-app,com.dra.todo_app.service.impl,TaskServiceImpl,0,105,0,2,0,18,0,5,0,4
+todo-app,com.dra.todo_app.exception,CommonExceptionHandler,61,3,0,0,11,1,4,1,4,1
+todo-app,com.dra.todo_app.exception,NotFoundException,0,4,0,0,0,2,0,1,0,1
+todo-app,com.dra.todo_app.dto,TaskDto,0,3,0,0,0,1,0,1,0,1
+todo-app,com.dra.todo_app.dto,TaskStatusUpdateDto,0,3,0,0,0,1,0,1,0,1
+todo-app,com.dra.todo_app.controller,TaskContoller,0,57,0,6,0,9,0,6,0,3
+todo-app,com.dra.todo_app.constant,AppConstant,0,7,0,0,0,2,0,1,0,1
+todo-app,com.dra.todo_app.config,WebConfig,0,8,0,0,0,2,0,2,0,2
+todo-app,com.dra.todo_app.config,WebConfig.new WebMvcConfigurer() {...},0,29,0,0,0,6,0,2,0,2
+todo-app,com.dra.todo_app.entity,CommonEntity,0,14,0,0,0,6,0,3,0,3
+todo-app,com.dra.todo_app.entity,TaskEntity,0,3,0,0,0,1,0,1,0,1

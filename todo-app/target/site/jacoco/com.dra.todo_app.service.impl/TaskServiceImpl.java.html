@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TaskServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">todo-app</a> &gt; <a href="index.source.html" class="el_package">com.dra.todo_app.service.impl</a> &gt; <span class="el_source">TaskServiceImpl.java</span></div><h1>TaskServiceImpl.java</h1><pre class="source lang-java linenums">package com.dra.todo_app.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import com.dra.todo_app.dto.TaskDto;
+import com.dra.todo_app.dto.TaskStatusUpdateDto;
+import com.dra.todo_app.entity.TaskEntity;
+import com.dra.todo_app.exception.NotFoundException;
+import com.dra.todo_app.repository.TaskRepository;
+import com.dra.todo_app.service.TaskService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class TaskServiceImpl implements TaskService{
+
+    private final TaskRepository taskRepository;
+    private final ObjectMapper objectMapper;
+
+    @Override
+    public Page&lt;TaskDto&gt; getTasksByStatus(int status, int page, int pageSize){
+<span class="fc" id="L30">        Pageable pageable = PageRequest.of(page-1, pageSize, Sort.by(&quot;createdAt&quot;).descending());</span>
+<span class="fc" id="L31">        Page&lt;TaskEntity&gt; entityData = this.taskRepository.findAllByStatus(status, pageable);</span>
+<span class="fc" id="L32">        List&lt;TaskDto&gt; data = entityData.getContent().stream()</span>
+<span class="fc" id="L33">                                        .map(x -&gt; objectMapper.convertValue(x, TaskDto.class))</span>
+<span class="fc" id="L34">                                        .collect(Collectors.toList());</span>
+<span class="fc" id="L35">        return new PageImpl&lt;&gt;(data, pageable, entityData.getTotalElements());</span>
+    }
+
+    @Override
+    public TaskDto createTask(TaskDto taskDto){
+<span class="fc" id="L40">        TaskEntity dataEntity = objectMapper.convertValue(taskDto, TaskEntity.class);</span>
+<span class="fc" id="L41">        TaskEntity savedDataEntity = this.taskRepository.save(dataEntity);</span>
+<span class="fc" id="L42">        TaskDto data = objectMapper.convertValue(savedDataEntity, TaskDto.class);</span>
+<span class="fc" id="L43">        return data;</span>
+    }
+
+    @Override
+    public TaskDto updateStatusOfTask(Long id, TaskStatusUpdateDto taskStatusUpdateDto){
+<span class="fc" id="L48">        Optional&lt;TaskEntity&gt; dataEntityOpt = this.taskRepository.findById(id);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if(dataEntityOpt.isEmpty()){</span>
+<span class="fc" id="L50">            throw new NotFoundException(&quot;To Do task not found with the given id&quot;);</span>
+        }
+<span class="fc" id="L52">        TaskEntity entityData = dataEntityOpt.get();</span>
+<span class="fc" id="L53">        entityData.setStatus(taskStatusUpdateDto.getStatus());</span>
+<span class="fc" id="L54">        TaskEntity savedEntityData = this.taskRepository.save(entityData);</span>
+<span class="fc" id="L55">        TaskDto data = objectMapper.convertValue(savedEntityData, TaskDto.class);</span>
+<span class="fc" id="L56">        return data;</span>
+    }
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
