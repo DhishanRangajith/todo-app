@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  frontend_service:
+    build:
+      context: ./todo-app-frontend
+    container_name: frontend
+    ports:
+      - "4300:80"
+    environment:
+      - API_URL=http://localhost:8020
+    networks:
+      - dranetwork
+    depends_on:
+      - app_service
+
+  app_service:
+    # image: dra1:1
+    build:
+      context: ./todo-app
+    container_name: app
+    ports:
+      - "8020:8080"
+    environment:
+      - DATASOURCE_URL=jdbc:mysql://sql_service:3306/todo_app
+      - DATASOURCE_USERNAME=dhishan
+      - DATASOURCE_PASSWORD=1234
+      - SERVER_PORT=8080
+      - WEB_CONFIG_ALLOWED_ORIGINS=http://localhost:4300
+    networks:
+      - dranetwork
+    depends_on:
+      sql_service:
+        condition: service_healthy
+
+  sql_service:
+    image: mysql:lts-oraclelinux9
+    container_name: sql
+    ports:
+      - "3319:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=ssssssssss
+      - MYSQL_DATABASE=todo_app
+      - MYSQL_USER=dhishan
+      - MYSQL_PASSWORD=1234
+    networks:
+      - dranetwork
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  dranetwork:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
